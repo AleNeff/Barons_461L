@@ -1,7 +1,6 @@
 from pymongo import MongoClient
 import json
 from bson import json_util
-from starlette.responses import StreamingResponse
 
 # Current user model: ID, username, password, role
 #TODO: add error handling for bad connections etc.
