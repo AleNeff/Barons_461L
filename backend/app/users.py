@@ -10,6 +10,12 @@ client = MongoClient(
 db = client.appDB
 users = db.users
 
+class User():
+    ID: str
+    username: str
+    password: str
+    role: int
+
 def post_user(ID=0, username="", password="", role=0):
     user = {"ID": ID,
             "username": username,
@@ -38,5 +44,3 @@ def test_functions():
   change_role("test", 100)
   user_json = get_user_by_username("test")
   print(user_json)
-
-test_functions()
