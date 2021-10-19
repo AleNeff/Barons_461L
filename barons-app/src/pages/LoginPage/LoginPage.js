@@ -7,8 +7,9 @@ import "./LoginPage.css";
 
 
 function Login() {
-    return(          
-        <div>
+    return(  
+        <Container>
+            <div>
             <Row>
                 <h1>Barons Team</h1>
             </Row>
@@ -23,7 +24,8 @@ function Login() {
                     <Button type="button" variant="contained" color="primary">Register</Button>
                 </div>
             </Row>
-        </div>
+            </div>
+        </Container>            
     );
 }
 

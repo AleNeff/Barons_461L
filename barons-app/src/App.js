@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './pages/LoginPage/LoginPage'
+import Projects from './pages/ProjectsPage/ProjectsPage';
 import Navigation from './components/Navigation';
 import './App.css';
 
@@ -9,7 +10,8 @@ function App() {
     <div className="App">
       <Navigation/>
       <Router>
-            <Route path='/' component={Login} />
+            <Route exact path='/projects' render={() => <Projects username="Rushi"/>} />
+            <Route exact path='/' component={Login} />
       </Router>
     </div>
     
