@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Button, Form, FloatingLabel, ButtonGroup, Container, FormControl, ListGroup } from 'react-bootstrap';
 
-import './ProjectViewer.css'
+import './ProjectViewer.css';
 
 function ProjectViewer() {
     return(  
@@ -26,32 +26,25 @@ function ProjectViewer() {
                             </Col>
                         </Row>
                     </Col>
-                    <Col>
-                        <ButtonGroup className="center" aria-label="btnGroup">
-                                <Button size="lg" variant="outline-success">Check In</Button>
-                                <Button size="lg" variant="outline-info">Check Out</Button>
-                        </ButtonGroup>                    
+                    <Col className="center">
+                        <Button size="lg" variant="outline-success">Check In</Button>
+                        <Button size="lg" variant="outline-info">Check Out</Button>
                     </Col>
                 </Row>
                 <Row className="mt-5">
                     <Col>
-                        <ListGroup>
-                            <ListGroup.Item action variant="light">
-                                Rushi
-                            </ListGroup.Item>
-                            <ListGroup.Item action variant="light">
-                                Alejandro
-                            </ListGroup.Item>
-                            <ListGroup.Item action variant="light">
-                                Nghi
-                            </ListGroup.Item>
-                            <ListGroup.Item action variant="light">
-                                Kevin
-                            </ListGroup.Item>
-                        </ListGroup>
+                    <FloatingLabel controlId="floatingSelect" label="Add user">
+                        <Form.Select aria-label="Floating label select example">
+                            <option value="1">Rushi</option>
+                            <option value="2">Alejandro</option>
+                            <option value="3">Nghi</option>
+                            <option value="4">Kevin</option>
+                            <option value="5">Ian</option>
+                        </Form.Select>
+                    </FloatingLabel>
                     </Col>
-                    <Col>
-                        <Button className="center" size="lg" variant="outline-dark">Add User</Button>
+                    <Col className="center">
+                        <Button size="lg" variant="outline-dark">Add User</Button>
                     </Col>
 
                 </Row>
