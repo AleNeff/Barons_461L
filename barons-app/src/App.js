@@ -1,16 +1,16 @@
 import logo from './logo.svg';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './pages/LoginPage/LoginPage'
+import Navigation from './components/Navigation';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Switch>
+      <Navigation/>
+      <Router>
             <Route path='/' component={Login} />
-        </Switch>
-      </BrowserRouter>
+      </Router>
     </div>
     
   );
