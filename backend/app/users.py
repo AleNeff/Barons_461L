@@ -38,5 +38,3 @@ def test_functions():
   change_role("test", 100)
   user_json = get_user_by_username("test")
   print(user_json)
-
-test_functions()
