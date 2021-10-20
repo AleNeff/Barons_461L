@@ -1,0 +1,17 @@
+.projects-table {
+    float: center;
+    border-style: solid;
+    padding: 25px;    
+    border-radius: 25px;
+}
+
+.table {
+    border: 1px solid black;
+}
+
+.create-project {
+    width: 50%;
+    border-style: solid;
+    border-radius: 25px;
+    padding: 25px;
+}
