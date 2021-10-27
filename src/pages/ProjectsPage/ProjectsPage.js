@@ -32,8 +32,9 @@ function Projects(props) {
   const getUsername = () => {
     axios.get(url)
     .then((response) => {
-      const theUsername = response.data;
+      const theUsername = response.data["Hello"];
       console.log(response);
+      console.log(theUsername);
       setUsername(theUsername);
     }).catch(error => console.error(`Error: ${error}`));
   }
