@@ -5,7 +5,11 @@ import Projects from './pages/ProjectsPage/ProjectsPage';
 import Navigation from './components/Navigation';
 import './App.css';
 
+
+
+
 function App() {
+
   return (
     <div className="App">
       <Navigation/>
