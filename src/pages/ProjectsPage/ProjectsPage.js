@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Row,
   Col,
@@ -12,12 +12,32 @@ import {
 import ProjectViewer from "../../components/ProjectViewer";
 import "./ProjectsPage.css";
 import Spacer from "react-spacer";
+const axios = require('axios');
 
 function Projects(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+
+
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    getUsername();
+  }, []);
+
+  const url = "http://barons461-backend.herokuapp.com/"
+  const getUsername = () => {
+    axios.get(url)
+    .then((response) => {
+      const theUsername = response.data["Hello"];
+      console.log(response);
+      console.log(theUsername);
+      setUsername(theUsername);
+    }).catch(error => console.error(`Error: ${error}`));
+  }
 
   return (
     <Container className="mt-5">
@@ -123,6 +143,11 @@ function Projects(props) {
               <ProjectViewer />
             </Modal.Body>
           </Modal>
+        </Row>
+        <Row>
+          <div>
+            <h1>{username}</h1>
+          </div>
         </Row>
       </div>
     </Container>
