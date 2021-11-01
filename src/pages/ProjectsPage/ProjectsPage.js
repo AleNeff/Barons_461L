@@ -101,7 +101,7 @@ function Projects(props) {
               </Table>
             </div>
           </Col>
-          <Col>
+          <Col className="center">
             <div class="create-project">
               <h2>Create Project</h2>
               <Form>

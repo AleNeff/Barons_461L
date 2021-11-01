@@ -6,13 +6,14 @@ import Navigation from './components/Navigation';
 import HWSets from './pages/HWSetsPage/HWSetsPage';
 import './App.css';
 import { useState } from 'react';
+import Cookies from 'js-cookie';
 
 
 function App() {
   const [token, setToken] = useState(false);
 
 
-  if (!token) {
+  if (!Cookies.get('user-token')) {
     return(
       <LoginPage setToken={setToken}/>
     )
@@ -22,9 +23,8 @@ function App() {
     <div className="App">
       <Navigation/>
       <Router>
-            <Redirect to='/projects'/>    
             <Route exact path='/hwsets' component={HWSets}/>
-            <Route exact path='/projects' render={() => <Projects username="Rushi"/>} /> 
+            <Route exact path='/projects' render={() => <Projects username="Rushi" user={token}/>} /> 
       </Router>
     </div>
     

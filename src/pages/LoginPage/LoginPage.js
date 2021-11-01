@@ -1,8 +1,8 @@
 import React from 'react';
-import { Row, Col, Container } from 'react-bootstrap';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { Row, Col, Form, Container, Modal, Button } from 'react-bootstrap';
+import Cookies from 'js-cookie';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import "./LoginPage.css";
 
 
@@ -23,6 +23,12 @@ export default function LoginPage(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    let history = useHistory();
+
     /**
      * On submission of the login form, we authenticate the user and determine if their credentials are correct
      * If the credentials are invalid the token will be set to false. Need to do some kind of error catching to tell the user
@@ -31,32 +37,77 @@ export default function LoginPage(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         const token = LoginUser(username, password);
-        props.setToken(token);
-        console.log(token);
+        if (token) {
+            props.setToken(token);
+            console.log("Successfully logged in with token: " + token);
+            Cookies.set('user-token', token);
+            history.push("/projects");
+
+        }
+        else {
+            props.setToken(false);
+            console.log("Authentication failed");
+            alert("Login failed. Re-enter your credentials or create an account.");
+        }
+        
+        
     }
 
     return(  
         <Container>
             <div>
-                <Row>
-                    <div>
-                        <form className="form" onSubmit={handleSubmit}>
-                        <h1>Barons Team</h1>
-
-                            <TextField id="outlined basic" label="Username" variant="standard" value={username} onChange={e => setUsername(e.target.value)}/>
-                            <TextField id="outlined basic" label="Password" variant="standard" value={password} onChange={e => setPassword(e.target.value)}/>
-                            <Button type="button" variant="contained" color="primary" onClick = {handleSubmit}>Log in</Button>
-                        </form>                        
-                    </div>
-                </Row>
                 <Row className="center">
+                        <div>
+                            <form className="form" onSubmit={handleSubmit}>
+                                <Col>
+                                    <div className="login-form">
+                                        <h1>Barons Team</h1>
+                                        <Form>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Username</Form.Label>
+                                                <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)}/>
+                                            </Form.Group>
+                                            <Form.Group className="mb-3">
+                                                <Form.Label>Password</Form.Label>
+                                                <Form.Control type="text" value={password} onChange={e => setPassword(e.target.value)}/>
+                                            </Form.Group>
+                                            <Button type="button" onClick={handleSubmit}>Log in</Button>
+                                            <p>Don't have an account?</p>
+                                            <Button type="button" onClick={handleShow}>Register</Button>
+                                        </Form>
+                                    </div>
+                                </Col>
+                            </form>               
+                            
+                        </div>
+
+                </Row>
+                <Row>
                     <form>
-                        <p>Don't have an account?</p>
-                        <Button type="button" variant="contained" color="primary">Register</Button>
-                    </form>
+
+                    </form>         
                 </Row>
             </div>
+            <Modal dialogClassName="modal-90w" size="lg" show={show} onHide={handleClose}>
+                <Modal.Header>
+                <Modal.Title>Create an account</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)}/>
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="text" value={password} onChange={e => setPassword(e.target.value)}/>
+                        </Form.Group>
+                        <Button type="button">Register</Button>
+                    </Form>
+                </Modal.Body>
+            </Modal>
         </Container>            
+
     );
 }
 
