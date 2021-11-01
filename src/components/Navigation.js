@@ -5,6 +5,7 @@ const Navigation = () => {
     function deleteCookie() {
         Cookies.remove('user-token')
     }
+    
     return (
         <>
             <Navbar collapseOnSelect fixed="top" expand='sm' bg="dark" variant='dark'>
