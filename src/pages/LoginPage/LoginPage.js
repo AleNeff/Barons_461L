@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import "./LoginPage.css";
+import axios from 'axios';
 
 
 /** 
@@ -11,12 +12,24 @@ import "./LoginPage.css";
  *  if the credentials are valid, we will return the user object
  *  if the credentials are invalid, we will return false. 
  */
-function LoginUser(credentials) {
-    const token = {
-        username: "tester",
-        password: "foo"
-    }
-    return token;
+async function LoginUser(user, pass) {
+    const res = await axios.get('https://barons461-backend.herokuapp.com/user/login', {
+        params: {
+            username: user,
+            password: pass
+        }   
+    })
+    .then(function (response) {
+        if (response["data"][0] == -1) {
+            return null;
+        }
+        else {
+            user = JSON.parse(response["data"][0]);
+            console.log(user);
+            console.log(user["username"]);
+            return user;
+        }     
+    })
 }
 
 export default function LoginPage(props) {
@@ -34,13 +47,14 @@ export default function LoginPage(props) {
      * If the credentials are invalid the token will be set to false. Need to do some kind of error catching to tell the user
      * that their credentials are invalid. 
      */
-    const handleSubmit = (e) => {
+    async function handleSubmit(e){
         e.preventDefault();
-        const token = LoginUser(username, password);
+        const token = await LoginUser(username, password);
+        console.log("my token is" + token);
         if (token) {
             props.setToken(token);
             console.log("Successfully logged in with token: " + token);
-            Cookies.set('user-token', token);
+            Cookies.set('user-token', token, { expires: 1 });
             history.push("/projects");
 
         }
