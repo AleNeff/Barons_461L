@@ -19,17 +19,20 @@ async function LoginUser(user, pass) {
             password: pass
         }   
     })
+    
     .then(function (response) {
-        if (response["data"][0] == -1) {
+        if (response["data"][0] === -1) {
             return null;
         }
         else {
-            user = JSON.parse(response["data"][0]);
-            console.log(user);
-            console.log(user["username"]);
-            return user;
+            let dbUser = JSON.parse(response["data"][0]);
+            console.log(dbUser);
+            console.log(dbUser["username"]);
+            return dbUser;
         }     
     })
+    
+    return res["username"];
 }
 
 export default function LoginPage(props) {
@@ -50,12 +53,13 @@ export default function LoginPage(props) {
     async function handleSubmit(e){
         e.preventDefault();
         const token = await LoginUser(username, password);
-        console.log("my token is" + token);
+        console.log("my token is " + token);
         if (token) {
             props.setToken(token);
             console.log("Successfully logged in with token: " + token);
             Cookies.set('user-token', token, { expires: 1 });
             history.push("/projects");
+            window.location.reload();
 
         }
         else {
