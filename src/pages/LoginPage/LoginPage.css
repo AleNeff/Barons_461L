@@ -26,3 +26,15 @@
   .form .form__custom-button {
     margin-top: 50px;
   }
+  .center {
+    display: flex;
+    justify-content: 'center';
+    align-items: 'center';
+  }
+
+.login-form {
+  width: 120%;
+  border-style: solid;
+  border-radius: 25px;
+  padding: 25px;
+}
