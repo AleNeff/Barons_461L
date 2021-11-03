@@ -12,16 +12,58 @@ import {
 import ProjectViewer from "../../components/ProjectViewer";
 import "./ProjectsPage.css";
 import Spacer from "react-spacer";
+import Cookies from "js-cookie";
+
 const axios = require('axios');
+
+const url = 'https://barons461-backend.herokuapp.com'
+
+async function getProjects(current_user) {
+  const res = await axios.get(`${url}/project/get_all`, {
+    params: {
+      current_user: current_user
+    }
+  })
+  .then (function (response) {
+    return response;
+  })
+
+  return res;
+}
+
 
 
 
 
 function Projects(props) {
   const [show, setShow] = useState(false);
+  const [projects, setProjects] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(async () => {
+    let result = await getProjects(Cookies.get('user-token'));
+    console.log(result["data"]);
+    setProjects(result["data"]);
+  }, [])
+
+
+  function renderProjects(project, index) {
+    return (
+      <tr key={index}>
+        <td>{project.project_name}</td>
+        <td>{project.project_description}</td>
+        <td>{project.project_id}</td>
+        <td>
+          <ButtonGroup aria-label="btnGroup">
+            <Button variant="outline-primary" onClick={handleShow}>Open</Button>
+            <Button variant="outline-danger">Delete</Button>
+          </ButtonGroup>
+        </td>
+      </tr>
+    );
+}
 
   return (
     <Container className="mt-5">
@@ -46,41 +88,7 @@ function Projects(props) {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Project 1</td>
-                    <td>foo</td>
-                    <td>123</td>
-                    <td>
-                      <ButtonGroup aria-label="btnGroup">
-                        <Button variant="outline-primary" onClick={handleShow}>
-                          Open
-                        </Button>
-                        <Button variant="outline-danger">Delete</Button>
-                      </ButtonGroup>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Project 2</td>
-                    <td>foo</td>
-                    <td>456</td>
-                    <td>
-                      <ButtonGroup aria-label="btnGroup">
-                        <Button variant="outline-primary">Open</Button>
-                        <Button variant="outline-danger">Delete</Button>
-                      </ButtonGroup>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Project 3</td>
-                    <td>foo</td>
-                    <td>789</td>
-                    <td>
-                      <ButtonGroup aria-label="btnGroup">
-                        <Button variant="outline-primary">Open</Button>
-                        <Button variant="outline-danger">Delete</Button>
-                      </ButtonGroup>
-                    </td>
-                  </tr>
+                  {projects.map(renderProjects)}
                 </tbody>
               </Table>
             </div>

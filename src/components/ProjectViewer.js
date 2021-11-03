@@ -3,7 +3,7 @@ import { Row, Col, Button, Form, FloatingLabel, ButtonGroup, Container, FormCont
 
 import './ProjectViewer.css';
 
-function ProjectViewer() {
+function ProjectViewer(props) {
     return(  
         <Container>
             <div>
