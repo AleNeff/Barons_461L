@@ -13,7 +13,38 @@ import "./HWSetsPage.css";
 import Spacer from "react-spacer";
 
 function HWSets() {
+  const randID = () => {
+    return Math.random() * 1000000;
+  };
 
+  const [HW, setHW] = useState([
+    { id: randID(), name: "HW Set 1", capacity: 500, available: 200 },
+    { id: randID(), name: "HW Set 2", capacity: 700, available: 200 },
+    { id: randID(), name: "HW Set 3", capacity: 900, available: 300 }
+  ]);
+
+  const deleteHW = (id) => {
+    setHW(HW.filter((item) => item.id !== id));
+  };
+  // onClick={deleteHW(hw.id)}
+  const displayHW = (hw) => {
+    return (
+      <tr key={hw.id}>
+        <td>{hw.name}</td>
+        <td>{hw.capacity}</td>
+        <td>{hw.available}</td>
+        <td>
+          <ButtonGroup aria-label="btnGroup">
+            <Button variant="outline-danger" onClick={() => deleteHW(hw.id)}>
+              Delete
+            </Button>
+          </ButtonGroup>
+        </td>
+      </tr>
+    );
+  };
+
+  console.log(HW);
   return (
     <Container className="mt-5">
       <div>
@@ -36,7 +67,8 @@ function HWSets() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  {HW.map(displayHW)}
+                  {/* <tr>
                     <td>HW Set 1</td>
                     <td>500</td>
                     <td>200</td>
@@ -65,7 +97,7 @@ function HWSets() {
                         <Button variant="outline-danger">Delete</Button>
                       </ButtonGroup>
                     </td>
-                  </tr>
+                  </tr> */}
                 </tbody>
               </Table>
             </div>
@@ -88,7 +120,7 @@ function HWSets() {
                   <Form.Label>Capacity</Form.Label>
                   <Form.Control type="text" />
                 </Form.Group>
-                
+
                 <Button>Create</Button>
               </Form>
             </div>

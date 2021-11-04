@@ -10,7 +10,7 @@ const DBPage = () => {
     fetch("https://api.nal.usda.gov/fdc/v1/foods/list?api_key=DEMO_KEY")
       .then((res) => res.json())
       .then((data) => {
-        setFoods(data.slice(0, 5));
+        setFoods(data.slice(0, 5)); //This value can be changed to display as many as we want
       });
   }, []);
 
