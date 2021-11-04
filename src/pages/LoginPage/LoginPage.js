@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./LoginPage.css";
 import axios from "axios";
+import Spacer from "react-spacer";
 
 /**
  *  This will authenticate the user, calling the authenticate() endpoint in Flask
@@ -69,6 +70,9 @@ export default function LoginPage(props) {
   return (
     <Container>
       <div>
+        <Row>
+          <Spacer height="18px" />
+        </Row>
         <Row className="center">
           <div>
             <form className="form" onSubmit={handleSubmit}>
