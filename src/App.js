@@ -24,7 +24,9 @@ function App() {
   return (
     <div className="App">
       <Navigation />
+
       <Router>
+        <Route exact path="/" component={LoginPage} />
         <Route exact path="/hwsets" component={HWSets} />
         <Route
           exact
