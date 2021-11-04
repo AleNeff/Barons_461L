@@ -12,6 +12,7 @@ import HWSets from "./pages/HWSetsPage/HWSetsPage";
 import "./App.css";
 import { useState } from "react";
 import Cookies from "js-cookie";
+import DBPage from "./pages/DatabasePage/DBPage";
 
 function App() {
   const [token, setToken] = useState(false);
@@ -30,6 +31,7 @@ function App() {
           path="/projects"
           render={() => <Projects username="Rushi" user={token} />}
         />
+        <Route exact path="/sources" component={DBPage} />
       </Router>
     </div>
   );
