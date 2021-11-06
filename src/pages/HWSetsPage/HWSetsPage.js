@@ -47,10 +47,6 @@ function HWSets() {
     );
   };
 
-  const createHW = () => {};
-  console.log(name);
-  console.log(cap);
-  // console.log(HW);
   return (
     <Container className="mt-5">
       <div>
