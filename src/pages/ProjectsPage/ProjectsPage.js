@@ -14,11 +14,11 @@ import "./ProjectsPage.css";
 import Spacer from "react-spacer";
 import Cookies from "js-cookie";
 import { Modal,ModalManager,Effect} from 'react-dynamic-modal';
-
-
-const axios = require('axios');
+import axios from "axios";
 
 const url = 'https://barons461-backend.herokuapp.com'
+
+
 
 async function getProjects(current_user) {
   const res = await axios.get(`${url}/project/get_all`, {
@@ -50,13 +50,30 @@ async function createProject(name, desc, id, owner) {
   window.location.reload();
 }
 
+async function deleteProject(owner, id) {
+  console.log(owner, id)
+  const params = JSON.stringify({
+    "current_user": owner,
+    "project_id": id
+  });
+  const res = await axios.post(`${url}/project/delete_id`, params, {
+    "headers": {
+      "content-type": "application/json",
+    }
+  })
+  console.log(res);
+  window.location.reload();
+}
+
 
 function MyModal(props) {
+  console.log(props.project.project_id)
+
   return (
     <Modal onRequestClose={props.onRequestClose} effect={Effect.ScaleUp}>
       <h1>{props.project.project_name}</h1>
       <br/>
-      <ProjectViewer/>
+      <ProjectViewer project_id={props.project.project_id}/>
       <br/>
       <Button onClick={ModalManager.close}>Close</Button>
     </Modal>
@@ -80,21 +97,8 @@ function Projects(props) {
     // will likely make a call for hardware sets here and populate state variable for access
   }, [])
 
-  // function renderModal(project, index) {   
-  //   return (
-  //     <Modal dialogClassName="modal-90w" size="lg" show={show} onHide={handleClose} key={index}>
-  //       <Modal.Header>
-  //         <Modal.Title>{project.project_name}</Modal.Title>
-  //       </Modal.Header>
-  //       <Modal.Body>
-  //         <ProjectViewer />
-  //       </Modal.Body>
-  //     </Modal>
-  //   );
-  // }
 
-  function openModal(project, index) {
-    console.log("hello")
+  function openModal(project) {
     ModalManager.open(<MyModal project={project} onRequestClose={() => true}/>)
   }
 
@@ -107,7 +111,7 @@ function Projects(props) {
         <td>
           <ButtonGroup aria-label="btnGroup">
             <Button variant="outline-primary" onClick={() => openModal(project, index)}>Open</Button>
-            <Button variant="outline-danger">Delete</Button>
+            <Button variant="outline-danger" onClick={() => deleteProject(Cookies.get('user-token'), project.project_id)}>Delete</Button>
           </ButtonGroup>
         </td>
       </tr>
