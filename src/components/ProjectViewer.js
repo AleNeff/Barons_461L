@@ -1,44 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Row, Col, Button, Form, FloatingLabel, ButtonGroup, Container, FormControl, ListGroup } from 'react-bootstrap';
-import Cookies from 'js-cookie';
-import axios from 'axios';
+
 import './ProjectViewer.css';
 
-const url = 'https://barons461-backend.herokuapp.com'
-
-async function getAllUsers() {
-    const res = await axios.get(`${url}/user/get_all`)
-    
-    return res;
-}
-
-async function addUser(current_user, new_user, project) {
-    console.log(current_user, new_user, project)
-    const params = {
-        current_user: current_user,
-        project_id: project,
-        user_name: new_user
-    }
-
-    const res = await axios.post(`${url}/project/add_user`, params);
-    console.log(res);
-    return res;
-}
-
-function ProjectViewer(props) {
-    const [users, setUsers] = useState([]);
-    const [selectedUser, setSelectedUser] = useState();
-    
-    useEffect(async () => {
-        let result = await getAllUsers();
-        console.log(result["data"]);
-        
-        setUsers(result["data"]);
-        // console.log(users);
-        // will likely make a call for hardware sets here and populate state variable for access
-    }, [])
-
-
+function ProjectViewer() {
     return(  
         <Container>
             <div>
@@ -69,13 +34,17 @@ function ProjectViewer(props) {
                 <Row className="mt-5">
                     <Col>
                     <FloatingLabel controlId="floatingSelect" label="Add user">
-                        <Form.Select aria-label="Floating label select example" onChange={(e) => setSelectedUser(e.target.value)}>
-                            {users.map(user => <option>{user.username}</option>)}
+                        <Form.Select aria-label="Floating label select example">
+                            <option value="1">Rushi</option>
+                            <option value="2">Alejandro</option>
+                            <option value="3">Nghi</option>
+                            <option value="4">Kevin</option>
+                            <option value="5">Ian</option>
                         </Form.Select>
                     </FloatingLabel>
                     </Col>
                     <Col className="center">
-                        <Button size="lg" variant="outline-dark" onClick={() => addUser(Cookies.get('user-token'), selectedUser, props.project_id)}>Add User</Button>
+                        <Button size="lg" variant="outline-dark">Add User</Button>
                     </Col>
 
                 </Row>
