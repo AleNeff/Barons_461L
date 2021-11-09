@@ -22,18 +22,17 @@ async function LoginUser(user, pass) {
     })
 
     .then(function (response) {
-        if (response["data"][0] === -1) {
-            return null;
-        }
-        else {
-            let dbUser = JSON.parse(response["data"][0]);
-            console.log(dbUser);
-            console.log(dbUser["username"]);
-            return dbUser;
-        }     
-    })
-    
-    return res;
+      if (response["data"][0] === -1) {
+        return null;
+      } else {
+        let dbUser = JSON.parse(response["data"][0]);
+        console.log(dbUser);
+        console.log(dbUser["username"]);
+        return dbUser;
+      }
+    });
+
+  return res["username"];
 }
 
 export default function LoginPage(props) {
@@ -42,20 +41,9 @@ export default function LoginPage(props) {
 
   const [show, setShow] = useState(false);
 
-    /**
-     * On submission of the login form, we authenticate the user and determine if their credentials are correct
-     * If the credentials are invalid the token will be set to false. Need to do some kind of error catching to tell the user
-     * that their credentials are invalid. 
-     */
-    async function handleSubmit(e){
-        e.preventDefault();
-        const token = await LoginUser(username, password);
-        if (token) {
-            props.setToken(token["username"]);
-            console.log("Successfully logged in with token: " + token["username"]);
-            Cookies.set('user-token', token["username"], { expires: 1 });
-            history.push("/projects");
-            window.location.reload();
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  let history = useHistory();
 
   /**
    * On submission of the login form, we authenticate the user and determine if their credentials are correct
