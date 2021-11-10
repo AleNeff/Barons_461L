@@ -66,7 +66,9 @@ async function deleteProject(owner, id) {
       "content-type": "application/json",
     }
   })
-  console.log(res);
+  if (res["data"] === -1) {
+    alert("You are not authorized to delete this!")
+  }
   window.location.reload();
 }
 

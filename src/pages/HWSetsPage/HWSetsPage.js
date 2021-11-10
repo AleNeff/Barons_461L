@@ -83,7 +83,7 @@ function HWSets() {
               </Table>
             </div>
           </Col>
-          <Col>
+          {/* <Col>
             <div class="create-project">
               <h2>Create HW Set</h2>
               <Form>
@@ -108,7 +108,7 @@ function HWSets() {
                   />
                 </Form.Group>
 
-                {/* <Button
+                <Button
                   onClick={() =>
                     setHW([
                       ...HW,
@@ -122,10 +122,10 @@ function HWSets() {
                   }
                 >
                   Create
-                </Button> */}
+                </Button>
               </Form>
             </div>
-          </Col>
+          </Col> */}
         </Row>
       </div>
     </Container>
