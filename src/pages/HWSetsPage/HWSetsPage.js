@@ -13,6 +13,39 @@ import "./HWSetsPage.css";
 import Spacer from "react-spacer";
 
 function HWSets() {
+  const randID = () => {
+    return Math.random() * 1000000;
+  };
+
+  const [HW, setHW] = useState([
+    { id: randID(), name: "HW Set 1", capacity: 500, available: 200 },
+    { id: randID(), name: "HW Set 2", capacity: 700, available: 200 },
+    { id: randID(), name: "HW Set 3", capacity: 900, available: 300 }
+  ]);
+
+  const deleteHW = (id) => {
+    setHW(HW.filter((item) => item.id !== id));
+  };
+
+  const [name, setName] = useState("");
+  const [cap, setCap] = useState("");
+
+  const displayHW = (hw) => {
+    return (
+      <tr key={hw.id}>
+        <td>{hw.name}</td>
+        <td>{hw.capacity}</td>
+        <td>{hw.available}</td>
+        <td>
+          <ButtonGroup aria-label="btnGroup">
+            <Button variant="outline-danger" onClick={() => deleteHW(hw.id)}>
+              Delete
+            </Button>
+          </ButtonGroup>
+        </td>
+      </tr>
+    );
+  };
 
   return (
     <Container className="mt-5">
@@ -35,38 +68,7 @@ function HWSets() {
                     <th>Available</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>HW Set 1</td>
-                    <td>500</td>
-                    <td>200</td>
-                    <td>
-                      <ButtonGroup aria-label="btnGroup">
-                        <Button variant="outline-danger">Delete</Button>
-                      </ButtonGroup>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>HW Set 2</td>
-                    <td>700</td>
-                    <td>200</td>
-                    <td>
-                      <ButtonGroup aria-label="btnGroup">
-                        <Button variant="outline-danger">Delete</Button>
-                      </ButtonGroup>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>HW Set 3</td>
-                    <td>900</td>
-                    <td>300</td>
-                    <td>
-                      <ButtonGroup aria-label="btnGroup">
-                        <Button variant="outline-danger">Delete</Button>
-                      </ButtonGroup>
-                    </td>
-                  </tr>
-                </tbody>
+                <tbody>{HW.map(displayHW)}</tbody>
               </Table>
             </div>
           </Col>
@@ -79,17 +81,37 @@ function HWSets() {
                   controlId="exampleForm.ControlInput1"
                 >
                   <Form.Label>Name</Form.Label>
-                  <Form.Control type="text" />
+                  <Form.Control
+                    type="text"
+                    onChange={(e) => setName(e.target.value)}
+                  />
                 </Form.Group>
                 <Form.Group
                   className="mb-3"
                   controlId="exampleForm.ControlTextarea1"
                 >
                   <Form.Label>Capacity</Form.Label>
-                  <Form.Control type="text" />
+                  <Form.Control
+                    type="text"
+                    onChange={(e) => setCap(e.target.value)}
+                  />
                 </Form.Group>
-                
-                <Button>Create</Button>
+
+                <Button
+                  onClick={() =>
+                    setHW([
+                      ...HW,
+                      {
+                        id: randID(),
+                        name: name,
+                        capacity: cap,
+                        available: 200
+                      }
+                    ])
+                  }
+                >
+                  Create
+                </Button>
               </Form>
             </div>
           </Col>
