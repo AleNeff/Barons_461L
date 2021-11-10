@@ -12,10 +12,7 @@ import {
 import ProjectViewer from "../../components/ProjectViewer";
 import "./ProjectsPage.css";
 import Spacer from "react-spacer";
-const axios = require('axios');
-
-
-
+const axios = require("axios");
 
 function Projects(props) {
   const [show, setShow] = useState(false);
