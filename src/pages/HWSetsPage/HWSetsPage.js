@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Row,
   Col,
@@ -17,32 +17,43 @@ function HWSets() {
     return Math.random() * 1000000;
   };
 
-  const [HW, setHW] = useState([
-    { id: randID(), name: "HW Set 1", capacity: 500, available: 200 },
-    { id: randID(), name: "HW Set 2", capacity: 700, available: 200 },
-    { id: randID(), name: "HW Set 3", capacity: 900, available: 300 }
-  ]);
+  const [HW, setHW] = useState([]);
+
+  useEffect(() => {
+    fetch("https://barons461-backend.herokuapp.com/hwSets/get_all")
+      .then((res) => res.json())
+      .then((data) => {
+        setHW(data); 
+      });
+  }, []);
+
+  // const [HW, setHW] = useState([
+  //   { id: randID(), name: "HW Set 1", capacity: 500, available: 200 },
+  //   { id: randID(), name: "HW Set 2", capacity: 700, available: 200 },
+  //   { id: randID(), name: "HW Set 3", capacity: 900, available: 300 }
+  // ]);
 
   const deleteHW = (id) => {
     setHW(HW.filter((item) => item.id !== id));
   };
 
-  const [name, setName] = useState("");
-  const [cap, setCap] = useState("");
+  // const [name, setName] = useState("");
+  // const [cap, setCap] = useState("");
 
+  // onClick={() => deleteHW(hw.id)}
   const displayHW = (hw) => {
     return (
-      <tr key={hw.id}>
-        <td>{hw.name}</td>
-        <td>{hw.capacity}</td>
-        <td>{hw.available}</td>
-        <td>
+      <tr key={hw.Name}>
+        <td>{hw.Name}</td>
+        <td>{hw.Capacity}</td>
+        <td>{hw.Availability}</td>
+        {/* <td>
           <ButtonGroup aria-label="btnGroup">
-            <Button variant="outline-danger" onClick={() => deleteHW(hw.id)}>
+            <Button variant="outline-danger" >
               Delete
             </Button>
           </ButtonGroup>
-        </td>
+        </td> */}
       </tr>
     );
   };
@@ -83,7 +94,7 @@ function HWSets() {
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
-                    onChange={(e) => setName(e.target.value)}
+                    // onChange={(e) => setName(e.target.value)}
                   />
                 </Form.Group>
                 <Form.Group
@@ -93,11 +104,11 @@ function HWSets() {
                   <Form.Label>Capacity</Form.Label>
                   <Form.Control
                     type="text"
-                    onChange={(e) => setCap(e.target.value)}
+                    // onChange={(e) => setCap(e.target.value)}
                   />
                 </Form.Group>
 
-                <Button
+                {/* <Button
                   onClick={() =>
                     setHW([
                       ...HW,
@@ -111,7 +122,7 @@ function HWSets() {
                   }
                 >
                   Create
-                </Button>
+                </Button> */}
               </Form>
             </div>
           </Col>
