@@ -33,6 +33,11 @@ async function getProjects(current_user) {
   return res;
 }
 
+async function getSets() {
+  const res = await axios.get(`${url}/hwSets/get_all`);
+  return res;
+}
+
 async function createProject(name, desc, id, owner) {
   console.log(name, desc, id, owner);
   const params = JSON.stringify({
@@ -85,7 +90,7 @@ function MyModal(props) {
     <Modal onRequestClose={props.onRequestClose} effect={Effect.ScaleUp}>
       <h1>{props.project.project_name}</h1>
       <br/>
-      <ProjectViewer project_id={props.project.project_id}/>
+      <ProjectViewer project_id={props.project.project_id} hwsets={props.hwsets}/>
       <br/>
       <Button onClick={ModalManager.close}>Close</Button>
     </Modal>
@@ -104,14 +109,17 @@ function Projects(props) {
 
   useEffect(async () => {
     let result = await getProjects(Cookies.get('user-token'));
+    let sets = await getSets();
     console.log(result["data"]);
+    console.log(sets["data"]);
+
     setProjects(result["data"]);
-    // will likely make a call for hardware sets here and populate state variable for access
+    setHWSets(sets["data"]);
   }, [])
 
 
-  function openModal(project) {
-    ModalManager.open(<MyModal project={project} onRequestClose={() => true}/>)
+  function openModal(project, hwsets) {
+    ModalManager.open(<MyModal project={project} hwsets={hwsets} onRequestClose={() => true}/>)
   }
 
   function renderProjects(project, index) {
@@ -122,7 +130,7 @@ function Projects(props) {
         <td>{project.project_id}</td>
         <td>
           <ButtonGroup aria-label="btnGroup">
-            <Button variant="outline-primary" onClick={() => openModal(project, index)}>Open</Button>
+            <Button variant="outline-primary" onClick={() => openModal(project, hwsets)}>Open</Button>
             <Button variant="outline-danger" onClick={() => deleteProject(Cookies.get('user-token'), project.project_id)}>Delete</Button>
           </ButtonGroup>
         </td>

@@ -25,19 +25,65 @@ async function addUser(current_user, new_user, project) {
     return res;
 }
 
+async function checkInHW(user, id, name, amount) {
+    amount = Number(amount);
+    const params = {
+        current_user: user,
+        project_id: id,
+        hwset_name: name,
+        amount_in: amount
+    }
+    console.log(params)
+    const res = await axios.post(`${url}/project/check_in`, params);
+    if (res["data"] === 0) {
+        alert(`Successfully checked in ${amount} hardware!`)
+    }
+    
+    console.log(res);
+}
+
+async function checkOutHW(user, id, name, amount) {
+    amount = Number(amount);
+    const params = {
+        current_user: user,
+        project_id: id,
+        hwset_name: name,
+        amount_out: amount
+    }
+    console.log(params)
+    const res = await axios.post(`${url}/project/check_out`, params);
+    if (res["data"] === 0) {
+        alert(`Successfully checked out ${amount} hardware!`)
+    } 
+    else if (res["data"] === 1){
+        alert(`Only some of the requested hardware could be checked out due to availability.`)
+    }
+    console.log(res);
+}
+
+
+
 function ProjectViewer(props) {
     const [users, setUsers] = useState([]);
-    const [selectedUser, setSelectedUser] = useState();
+    const [selectedUser, setSelectedUser] = useState(users[0]);
+    const [hwsetName, setHWSetName] = useState(props.hwsets[0].Name);
+    const [quantity, setQuantity] = useState();
     
     useEffect(async () => {
         let result = await getAllUsers();
-        console.log(result["data"]);
         
         setUsers(result["data"]);
-        // console.log(users);
-        // will likely make a call for hardware sets here and populate state variable for access
+
     }, [])
 
+    function verifyInput(num) {
+        if (Number(num) < 0) {
+            alert("Please only enter positive numbers")
+        }
+        else {
+            setQuantity(num);
+        }
+    }
 
     return(  
         <Container>
@@ -47,23 +93,21 @@ function ProjectViewer(props) {
                         <Row className="g-2">
                             <Col md>
                                 <FloatingLabel controlId="floatingSelectGrid" label="Hardware Sets">
-                                <Form.Select aria-label="Floating label select example">
-                                    <option value="1">HW Set 1</option>
-                                    <option value="2">HW Set 2</option>
-                                    <option value="3">HW Set 3</option>
+                                <Form.Select aria-label="Floating label select example" onChange={(e) => setHWSetName(e.target.value)}>
+                                    {props.hwsets.map(set => <option>{set.Name}</option>)}
                                 </Form.Select>
                                 </FloatingLabel>
                             </Col>
                             <Col md>
                                 <FloatingLabel controlId="floatingInputGrid" label="Quantity">
-                                <Form.Control type="email" placeholder="" />
+                                <Form.Control  placeholder="" type="number" min="0" onChange={(e) => verifyInput(e.target.value)} />
                                 </FloatingLabel>
                             </Col>
                         </Row>
                     </Col>
                     <Col className="center">
-                        <Button size="lg" variant="outline-success">Check In</Button>
-                        <Button size="lg" variant="outline-info">Check Out</Button>
+                        <Button size="lg" variant="outline-success" onClick={() => checkInHW(Cookies.get('user-token'), props.project_id, hwsetName, quantity)}>Check In</Button>
+                        <Button size="lg" variant="outline-info" onClick={() => checkOutHW(Cookies.get('user-token'), props.project_id, hwsetName, quantity)}>Check Out</Button>
                     </Col>
                 </Row>
                 <Row className="mt-5">
