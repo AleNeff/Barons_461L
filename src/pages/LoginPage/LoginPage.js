@@ -32,7 +32,7 @@ async function LoginUser(user, pass) {
         }     
     })
     
-    return res["username"];
+    return res;
 }
 
 export default function LoginPage(props) {
@@ -53,11 +53,10 @@ export default function LoginPage(props) {
     async function handleSubmit(e){
         e.preventDefault();
         const token = await LoginUser(username, password);
-        console.log("my token is " + token);
         if (token) {
-            props.setToken(token);
-            console.log("Successfully logged in with token: " + token);
-            Cookies.set('user-token', token, { expires: 1 });
+            props.setToken(token["username"]);
+            console.log("Successfully logged in with token: " + token["username"]);
+            Cookies.set('user-token', token["username"], { expires: 1 });
             history.push("/projects");
             window.location.reload();
 
