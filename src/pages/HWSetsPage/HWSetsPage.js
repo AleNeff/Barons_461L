@@ -13,9 +13,9 @@ import "./HWSetsPage.css";
 import Spacer from "react-spacer";
 
 function HWSets() {
-  const randID = () => {
-    return Math.random() * 1000000;
-  };
+  // const randID = () => {
+  //   return Math.random() * 1000000;
+  // };
 
   const [HW, setHW] = useState([]);
 
