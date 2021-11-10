@@ -49,8 +49,8 @@ const DBPage = () => {
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Author</th>
-                  <th>Description</th>
+                  <th>ID</th>
+                  <th>Date</th>
                   <th>Download</th>
                 </tr>
               </thead>
