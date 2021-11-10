@@ -35,6 +35,22 @@ async function LoginUser(user, pass) {
     return res;
 }
 
+async function RegisterUser(user, pass) {
+    console.log(user, pass);
+    const params = {
+        ID: "0000",
+        username: user,
+        password: pass
+    }
+    const res = await axios.post('https://barons461-backend.herokuapp.com/user/new_user', params);
+    if (res["data"] === 1) {
+        alert("Account created successfully! Please log in")
+    }
+    else {
+        alert("Account creation failed. Please try a different username")
+    }
+}
+
 export default function LoginPage(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -119,7 +135,7 @@ export default function LoginPage(props) {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="text" value={password} onChange={e => setPassword(e.target.value)}/>
                         </Form.Group>
-                        <Button type="button">Register</Button>
+                        <Button type="button" onClick={() => RegisterUser(username, password)}>Register</Button>
                     </Form>
                 </Modal.Body>
             </Modal>
