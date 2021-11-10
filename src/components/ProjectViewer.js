@@ -40,6 +40,7 @@ async function checkInHW(user, id, name, amount) {
     }
     
     console.log(res);
+    window.location.reload()
 }
 
 async function checkOutHW(user, id, name, amount) {
@@ -59,6 +60,8 @@ async function checkOutHW(user, id, name, amount) {
         alert(`Only some of the requested hardware could be checked out due to availability.`)
     }
     console.log(res);
+    window.location.reload()
+
 }
 
 
@@ -106,8 +109,8 @@ function ProjectViewer(props) {
                         </Row>
                     </Col>
                     <Col className="center">
-                        <Button size="lg" variant="outline-success" onClick={() => checkInHW(Cookies.get('user-token'), props.project_id, hwsetName, quantity)}>Check In</Button>
-                        <Button size="lg" variant="outline-info" onClick={() => checkOutHW(Cookies.get('user-token'), props.project_id, hwsetName, quantity)}>Check Out</Button>
+                        <Button size="lg" variant="outline-success" onClick={() => checkInHW(Cookies.get('user-token'), props.project.project_id, hwsetName, quantity)}>Check In</Button>
+                        <Button size="lg" variant="outline-info" onClick={() => checkOutHW(Cookies.get('user-token'), props.project.project_id, hwsetName, quantity)}>Check Out</Button>
                     </Col>
                 </Row>
                 <Row className="mt-5">
@@ -119,7 +122,7 @@ function ProjectViewer(props) {
                     </FloatingLabel>
                     </Col>
                     <Col className="center">
-                        <Button size="lg" variant="outline-dark" onClick={() => addUser(Cookies.get('user-token'), selectedUser, props.project_id)}>Add User</Button>
+                        <Button size="lg" variant="outline-dark" onClick={() => addUser(Cookies.get('user-token'), selectedUser, props.project.project_id)}>Add User</Button>
                     </Col>
 
                 </Row>

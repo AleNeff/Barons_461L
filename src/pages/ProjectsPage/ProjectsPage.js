@@ -90,7 +90,7 @@ function MyModal(props) {
     <Modal onRequestClose={props.onRequestClose} effect={Effect.ScaleUp}>
       <h1>{props.project.project_name}</h1>
       <br/>
-      <ProjectViewer project_id={props.project.project_id} hwsets={props.hwsets}/>
+      <ProjectViewer project={props.project} hwsets={props.hwsets}/>
       <br/>
       <Button onClick={ModalManager.close}>Close</Button>
     </Modal>
@@ -128,6 +128,9 @@ function Projects(props) {
         <td>{project.project_name}</td>
         <td>{project.project_description}</td>
         <td>{project.project_id}</td>
+        <td>{project.checked_out["HWSet1"]}</td>
+        <td>{project.checked_out["HWSet2"]}</td>
+        <td>{project.checked_out["HWSet3"]}</td>
         <td>
           <ButtonGroup aria-label="btnGroup">
             <Button variant="outline-primary" onClick={() => openModal(project, hwsets)}>Open</Button>
@@ -158,6 +161,9 @@ function Projects(props) {
                     <th>Project Name</th>
                     <th>Description</th>
                     <th>ID</th>
+                    <th>HW Set 1</th> 
+                    <th>HW Set 2</th> 
+                    <th>HW Set 3</th> 
                   </tr>
                 </thead>
                 <tbody>
