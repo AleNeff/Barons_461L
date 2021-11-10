@@ -65,6 +65,18 @@ async function deleteProject(owner, id) {
   window.location.reload();
 }
 
+async function joinProject(id, user) {
+  console.log(id, user);
+  const params = {
+    current_user: user,
+    project_id: id,
+    user_name: user
+  }
+
+  const res = await axios.post(`${url}/project/add_user`, params)
+  console.log(res);
+  window.location.reload()
+}
 
 function MyModal(props) {
   console.log(props.project.project_id)
@@ -125,7 +137,7 @@ function Projects(props) {
           <Spacer height="18px" />
         </Row>
         <Row>
-          <h1>Welcome {props.username}</h1>
+          <h1>Welcome {Cookies.get('user-token')}</h1>
           <Spacer height="28px" />
         </Row>
         <Row>
@@ -163,6 +175,18 @@ function Projects(props) {
                   <Form.Control type="text" onChange={(e) => setProjectID(e.target.value)}/>
                 </Form.Group>
                 <Button onClick={() => createProject(projectName, projectDesc, projectID, Cookies.get('user-token'))}>Create</Button>
+              </Form>
+            </div>
+          </Col>
+          <Col className="center">
+            <div class="create-project">
+              <h2>Join Project</h2>
+              <Form>
+                <Form.Group className="mb-3">
+                  <Form.Label>Project ID</Form.Label>
+                  <Form.Control type="text" onChange={(e) => setProjectID(e.target.value)}/>
+                </Form.Group>
+                <Button onClick={() => joinProject(projectID, Cookies.get('user-token'))}>Join</Button>
               </Form>
             </div>
           </Col>
