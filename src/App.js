@@ -7,6 +7,7 @@ import HWSets from './pages/HWSetsPage/HWSetsPage';
 import './App.css';
 import { useState } from 'react';
 import Cookies from 'js-cookie';
+import DBPage from './pages/DBPage/DBPage';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <Navigation/>
       <Router>
             <Route exact path='/hwsets' component={HWSets}/>
+            <Route exact path='/sources' component={DBPage}/>
             <Route exact path='/projects' render={() => <Projects username="Rushi" user={token}/>} /> 
       </Router>
     </div>
