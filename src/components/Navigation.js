@@ -15,7 +15,7 @@ const Navigation = () => {
                         <Nav>
                             <Nav.Link href='/projects'>Projects</Nav.Link>
                             <Nav.Link href='/hwsets'>Hardware Sets</Nav.Link>
-                            <Nav.Link href='/sources'>Sources</Nav.Link>
+                            <Nav.Link href='/sources'>Data Sets</Nav.Link>
                             <Nav.Link href='/' onClick={deleteCookie}>Logout</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
