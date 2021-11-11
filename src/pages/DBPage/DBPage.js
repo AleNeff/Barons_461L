@@ -37,7 +37,7 @@ const DBPage = () => {
       <Container className="mt-5">
         <Row>
           <Spacer height="28px" />
-          <h1>Sources</h1>
+          <h1>Data Sets</h1>
         </Row>
         <Row>
           <Spacer height="35px" />
