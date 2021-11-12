@@ -136,7 +136,7 @@ function Projects(props) {
         <td>
           <ButtonGroup aria-label="btnGroup">
             <Button variant="outline-primary" onClick={() => openModal(project, hwsets)}>Open</Button>
-            <Button variant="outline-danger" onClick={() => deleteProject(Cookies.get('user-token'), project.project_id)}>Delete</Button>
+            {/* <Button variant="outline-danger" onClick={() => deleteProject(Cookies.get('user-token'), project.project_id)}>Delete</Button> */}
           </ButtonGroup>
         </td>
       </tr>
