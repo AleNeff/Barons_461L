@@ -102,7 +102,7 @@ export default function LoginPage(props) {
                                             </Form.Group>
                                             <Form.Group className="mb-3">
                                                 <Form.Label>Password</Form.Label>
-                                                <Form.Control type="text" value={password} onChange={e => setPassword(e.target.value)}/>
+                                                <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)}/>
                                             </Form.Group>
                                             <Button type="button" onClick={handleSubmit}>Log in</Button>
                                             <p>Don't have an account?</p>
