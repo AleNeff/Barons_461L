@@ -12,10 +12,12 @@ import {
 import "./HWSetsPage.css";
 import Spacer from "react-spacer";
 
+
+async function createHWSet(name, cap) {
+  // make some request
+}
+
 function HWSets() {
-  // const randID = () => {
-  //   return Math.random() * 1000000;
-  // };
 
   const [HW, setHW] = useState([]);
 
@@ -37,8 +39,8 @@ function HWSets() {
     setHW(HW.filter((item) => item.id !== id));
   };
 
-  // const [name, setName] = useState("");
-  // const [cap, setCap] = useState("");
+  const [name, setName] = useState("");
+  const [cap, setCap] = useState("");
 
   // onClick={() => deleteHW(hw.id)}
   const displayHW = (hw) => {
@@ -83,7 +85,7 @@ function HWSets() {
               </Table>
             </div>
           </Col>
-          {/* <Col>
+          <Col>
             <div class="create-project">
               <h2>Create HW Set</h2>
               <Form>
@@ -94,7 +96,7 @@ function HWSets() {
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
-                    // onChange={(e) => setName(e.target.value)}
+                    onsChange={(e) => setName(e.target.value)}
                   />
                 </Form.Group>
                 <Form.Group
@@ -104,28 +106,16 @@ function HWSets() {
                   <Form.Label>Capacity</Form.Label>
                   <Form.Control
                     type="text"
-                    // onChange={(e) => setCap(e.target.value)}
+                    onChange={(e) => setCap(e.target.value)}
                   />
                 </Form.Group>
 
-                <Button
-                  onClick={() =>
-                    setHW([
-                      ...HW,
-                      {
-                        id: randID(),
-                        name: name,
-                        capacity: cap,
-                        available: 200
-                      }
-                    ])
-                  }
-                >
+                <Button onClick={() => createHWSet(name, cap)}>
                   Create
                 </Button>
               </Form>
             </div>
-          </Col> */}
+          </Col>
         </Row>
       </div>
     </Container>
