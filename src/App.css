@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: sans-serif;
 }
 
 .App-logo {
@@ -44,3 +45,32 @@
   align-items: center;
 }
 
+.body {
+  background: lightskyblue;
+}
+
+.form {
+  max-width: 330px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.form .form__custom-button {
+  margin-top: 50px;
+}
+.center {
+  display: flex;
+  justify-content: 'center';
+  align-items: 'center';
+}
+
+.login-form {
+width: 120%;
+border-style: solid;
+border-radius: 25px;
+padding: 25px;
+}

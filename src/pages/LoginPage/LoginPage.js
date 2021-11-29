@@ -3,7 +3,8 @@ import { Row, Col, Form, Container, Modal, Button } from 'react-bootstrap';
 import Cookies from 'js-cookie';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import "./LoginPage.css";
+// import "./LoginPage.css";
+import "../../App.css";
 import axios from 'axios';
 
 
