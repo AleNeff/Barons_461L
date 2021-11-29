@@ -126,22 +126,27 @@ function Projects(props) {
     ModalManager.open(<MyModal project={project} hwsets={hwsets} onRequestClose={() => true}/>)
   }
 
-  function renderCheckedOut(item, index) {
-    console.log("item is" + item)
-    return (
-      <td>{item}</td>
-    )
+  function renderCheckedOut(hwset, index) {
+
+    for (let i=0; i<this.checked_out.length; i++) {
+      if (hwset.Name === this.checked_out[i][0]) {
+        return <td>{this.checked_out[i][1]}</td>
+      }
+    }
+    return <td>0</td>
   }
 
+
   function renderProjects(project, index) {
-    let checked_out_values = Object.values(project.checked_out);
+    let checked_out_values = Object.entries(project.checked_out);
+    console.log(checked_out_values)
     return (
       <tr key={index}>
         <td>{project.project_name}</td>
         <td>{project.project_description}</td>
-        <td>{project.project_id}</td>        
-        {checked_out_values.map(renderCheckedOut)}
-  
+        <td>{project.project_id}</td>   
+        {hwsets.map(renderCheckedOut, {checked_out: checked_out_values})}
+
         <td>
           <ButtonGroup aria-label="btnGroup">
             <Button variant="outline-primary" onClick={() => openModal(project, hwsets)}>Open</Button>

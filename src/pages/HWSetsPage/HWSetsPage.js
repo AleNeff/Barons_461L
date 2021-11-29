@@ -14,20 +14,16 @@ import Spacer from "react-spacer";
 import axios from 'axios';
 
 async function createHWSet(name, capacity) {
+  let num_capacity = Number(capacity)
   const res = await axios.get('https://barons461-backend.herokuapp.com/hwSets/add_HardwareSets', {
     params: {
         hwSet_name: name,
-        capacity: capacity
+        capacity: num_capacity
     }   
 })
 
   console.log(res);
   window.location.reload();
-}
-
-
-async function createHWSet(name, cap) {
-  // make some request
 }
 
 function HWSets() {
