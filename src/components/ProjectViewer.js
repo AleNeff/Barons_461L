@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Button, Form, FloatingLabel, ButtonGroup, Container, FormControl, ListGroup } from 'react-bootstrap';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import './ProjectViewer.css';
+// import './ProjectViewer.css';
+import '../App.css';
 
 const url = 'https://barons461-backend.herokuapp.com'
 
@@ -108,7 +109,7 @@ function ProjectViewer(props) {
                             </Col>
                         </Row>
                     </Col>
-                    <Col className="center">
+                    <Col className="ProjectViewerCenter">
                         <Button size="lg" variant="outline-success" onClick={() => checkInHW(Cookies.get('user-token'), props.project.project_id, hwsetName, quantity)}>Check In</Button>
                         <Button size="lg" variant="outline-info" onClick={() => checkOutHW(Cookies.get('user-token'), props.project.project_id, hwsetName, quantity)}>Check Out</Button>
                     </Col>
@@ -121,7 +122,7 @@ function ProjectViewer(props) {
                         </Form.Select>
                     </FloatingLabel>
                     </Col>
-                    <Col className="center">
+                    <Col className="ProjectViewerCenter">
                         <Button size="lg" variant="outline-dark" onClick={() => addUser(Cookies.get('user-token'), selectedUser, props.project.project_id)}>Add User</Button>
                     </Col>
 
