@@ -25,10 +25,12 @@ async function createHWSet(name, capacity) {
   window.location.reload();
 }
 
+
+async function createHWSet(name, cap) {
+  // make some request
+}
+
 function HWSets() {
-  // const randID = () => {
-  //   return Math.random() * 1000000;
-  // };
 
   const [HWSetName, setHWSetName] = useState();
   const [HWSetCapacity, setHWSetCapacity] = useState();
@@ -52,8 +54,8 @@ function HWSets() {
     setHW(HW.filter((item) => item.id !== id));
   };
 
-  // const [name, setName] = useState("");
-  // const [cap, setCap] = useState("");
+  const [name, setName] = useState("");
+  const [cap, setCap] = useState("");
 
   // onClick={() => deleteHW(hw.id)}
   const displayHW = (hw) => {
@@ -84,7 +86,7 @@ function HWSets() {
         </Row>
         <Row>
           <Col style={{ marginRight: 75 }}>
-            <div class="projects-table">
+            <div id="hwsets-table" class="projects-table">
               <h2>Hardware Sets</h2>
               <Table className="table" striped bordered hover size="md">
                 <thead>

@@ -169,8 +169,8 @@ function Projects(props) {
           <Spacer height="28px" />
         </Row>
         <Row>
-          <Col style={{ marginRight: 75}}>
-            <div class="projects-table">
+          <Col style={{ marginRight: 75 }}>
+            <div id="projects-table" class="projects-table">
               <h2>Projects</h2>
               <Table className="table" striped bordered hover size="md" table-layout="fixed">
                 <thead>
