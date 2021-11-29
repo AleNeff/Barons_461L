@@ -71,7 +71,7 @@ function HWSets() {
         </Row>
         <Row>
           <Col style={{ marginRight: 75 }}>
-            <div class="projects-table">
+            <div id="hwsets-table" class="projects-table">
               <h2>Hardware Sets</h2>
               <Table className="table" striped bordered hover size="md">
                 <thead>

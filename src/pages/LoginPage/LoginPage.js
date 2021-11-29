@@ -98,11 +98,11 @@ export default function LoginPage(props) {
                                         <Form>
                                             <Form.Group className="mb-3">
                                                 <Form.Label>Username</Form.Label>
-                                                <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)}/>
+                                                <Form.Control type="text" id="username" name="username" value={username} onChange={e => setUsername(e.target.value)}/>
                                             </Form.Group>
                                             <Form.Group className="mb-3">
                                                 <Form.Label>Password</Form.Label>
-                                                <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)}/>
+                                                <Form.Control type="password" id="password" name="password" value={password} onChange={e => setPassword(e.target.value)}/>
                                             </Form.Group>
                                             <Button type="button" onClick={handleSubmit}>Log in</Button>
                                             <p>Don't have an account?</p>
@@ -135,7 +135,7 @@ export default function LoginPage(props) {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="text" value={password} onChange={e => setPassword(e.target.value)}/>
                         </Form.Group>
-                        <Button type="button" onClick={() => RegisterUser(username, password)}>Register</Button>
+                        <Button type="button" id="register" onClick={() => RegisterUser(username, password)}>Register</Button>
                     </Form>
                 </Modal.Body>
             </Modal>
