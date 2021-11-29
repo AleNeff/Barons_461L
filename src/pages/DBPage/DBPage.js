@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Table, Container } from "react-bootstrap";
 import Spacer from "react-spacer";
-import "./DBPage.css";
+// import "./DBPage.css";
+import "../../App.css";
 
 const DBPage = () => {
   const [foods, setFoods] = useState([]);

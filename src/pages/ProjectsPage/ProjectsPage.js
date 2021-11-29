@@ -10,7 +10,8 @@ import {
 
 } from "react-bootstrap";
 import ProjectViewer from "../../components/ProjectViewer";
-import "./ProjectsPage.css";
+// import "./ProjectsPage.css";
+import "../../App.css";
 import Spacer from "react-spacer";
 import Cookies from "js-cookie";
 import { Modal,ModalManager,Effect} from 'react-dynamic-modal';
