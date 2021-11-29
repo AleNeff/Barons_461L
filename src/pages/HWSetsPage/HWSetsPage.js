@@ -11,12 +11,27 @@ import {
 } from "react-bootstrap";
 import "./HWSetsPage.css";
 import Spacer from "react-spacer";
+import axios from 'axios';
+
+async function createHWSet(name, capacity) {
+  const res = await axios.get('https://barons461-backend.herokuapp.com/hwSets/add_HardwareSets', {
+    params: {
+        hwSet_name: name,
+        capacity: capacity
+    }   
+})
+
+  console.log(res);
+  window.location.reload();
+}
 
 function HWSets() {
   // const randID = () => {
   //   return Math.random() * 1000000;
   // };
 
+  const [HWSetName, setHWSetName] = useState();
+  const [HWSetCapacity, setHWSetCapacity] = useState();
   const [HW, setHW] = useState([]);
 
   useEffect(() => {
@@ -83,7 +98,7 @@ function HWSets() {
               </Table>
             </div>
           </Col>
-          {/* <Col>
+          <Col>
             <div class="create-project">
               <h2>Create HW Set</h2>
               <Form>
@@ -94,7 +109,7 @@ function HWSets() {
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
-                    // onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setHWSetName(e.target.value)}
                   />
                 </Form.Group>
                 <Form.Group
@@ -104,28 +119,16 @@ function HWSets() {
                   <Form.Label>Capacity</Form.Label>
                   <Form.Control
                     type="text"
-                    // onChange={(e) => setCap(e.target.value)}
+                    onChange={(e) => setHWSetCapacity(e.target.value)}
                   />
                 </Form.Group>
 
-                <Button
-                  onClick={() =>
-                    setHW([
-                      ...HW,
-                      {
-                        id: randID(),
-                        name: name,
-                        capacity: cap,
-                        available: 200
-                      }
-                    ])
-                  }
-                >
+                <Button onClick={() => createHWSet(HWSetName, HWSetCapacity)}>
                   Create
                 </Button>
               </Form>
             </div>
-          </Col> */}
+          </Col>
         </Row>
       </div>
     </Container>

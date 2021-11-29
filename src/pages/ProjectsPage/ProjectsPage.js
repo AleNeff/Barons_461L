@@ -38,13 +38,14 @@ async function getSets() {
   return res;
 }
 
-async function createProject(name, desc, id, owner) {
+async function createProject(name, desc, id, owner, funds) {
   console.log(name, desc, id, owner);
   const params = JSON.stringify({
     "project_name": name,
     "project_description": desc,
     "project_id": id,
-    "project_owner": owner
+    "project_owner": owner,
+    "funds": funds
   })
   const res = await axios.post(`${url}/project/create`, params, {
     "headers": {
@@ -105,6 +106,7 @@ function Projects(props) {
   const [projectDesc, setProjectDesc] = useState();
   const [projectID, setProjectID] = useState();
   const [projects, setProjects] = useState([]);
+  const [funds, setFunds] =  useState();
   const [hwsets, setHWSets] = useState([]);
 
   
@@ -124,15 +126,22 @@ function Projects(props) {
     ModalManager.open(<MyModal project={project} hwsets={hwsets} onRequestClose={() => true}/>)
   }
 
+  function renderCheckedOut(item, index) {
+    console.log("item is" + item)
+    return (
+      <td>{item}</td>
+    )
+  }
+
   function renderProjects(project, index) {
+    let checked_out_values = Object.values(project.checked_out);
     return (
       <tr key={index}>
         <td>{project.project_name}</td>
         <td>{project.project_description}</td>
-        <td>{project.project_id}</td>
-        <td>{project.checked_out["HWSet1"]}</td>
-        <td>{project.checked_out["HWSet2"]}</td>
-        <td>{project.checked_out["HWSet3"]}</td>
+        <td>{project.project_id}</td>        
+        {checked_out_values.map(renderCheckedOut)}
+  
         <td>
           <ButtonGroup aria-label="btnGroup">
             <Button variant="outline-primary" onClick={() => openModal(project, hwsets)}>Open</Button>
@@ -141,7 +150,13 @@ function Projects(props) {
         </td>
       </tr>
     );
-}
+  }
+
+  function renderTableHeads(hwset, index) {
+    return (
+      <th>{hwset.Name}</th>
+    )
+  }
 
   return (
     <Container className="mt-5">
@@ -154,18 +169,16 @@ function Projects(props) {
           <Spacer height="28px" />
         </Row>
         <Row>
-          <Col style={{ marginRight: 75 }}>
+          <Col style={{ marginRight: 75}}>
             <div class="projects-table">
               <h2>Projects</h2>
-              <Table className="table" striped bordered hover size="md">
+              <Table className="table" striped bordered hover size="md" table-layout="fixed">
                 <thead>
                   <tr>
                     <th>Project Name</th>
                     <th>Description</th>
                     <th>ID</th>
-                    <th>HW Set 1</th> 
-                    <th>HW Set 2</th> 
-                    <th>HW Set 3</th> 
+                    {hwsets.map(renderTableHeads)}
                   </tr>
                 </thead>
                 <tbody>
@@ -174,7 +187,7 @@ function Projects(props) {
               </Table>
             </div>
           </Col>
-          <Col className="center">
+          <Col className="center" style={{minWidth: 500}}>
             <div class="create-project">
               <h2>Create Project</h2>
               <Form>
@@ -190,7 +203,11 @@ function Projects(props) {
                   <Form.Label>Project ID</Form.Label>
                   <Form.Control type="text" onChange={(e) => setProjectID(e.target.value)}/>
                 </Form.Group>
-                <Button onClick={() => createProject(projectName, projectDesc, projectID, Cookies.get('user-token'))}>Create</Button>
+                <Form.Group className="mb-3">
+                  <Form.Label>Funds</Form.Label>
+                  <Form.Control type="text" onChange={(e) => setFunds(e.target.value)}/>
+                </Form.Group>
+                <Button onClick={() => createProject(projectName, projectDesc, projectID, Cookies.get('user-token'), funds)}>Create</Button>
               </Form>
             </div>
           </Col>

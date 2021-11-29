@@ -59,6 +59,9 @@ async function checkOutHW(user, id, name, amount) {
     else if (res["data"] === 1){
         alert(`Only some of the requested hardware could be checked out due to availability.`)
     }
+    else if (res["data"] === -1) {
+        alert(`Could not check out hardware due to lack of funds`)
+    }
     console.log(res);
     window.location.reload()
 
@@ -124,7 +127,12 @@ function ProjectViewer(props) {
                     <Col className="center">
                         <Button size="lg" variant="outline-dark" onClick={() => addUser(Cookies.get('user-token'), selectedUser, props.project.project_id)}>Add User</Button>
                     </Col>
-
+                </Row>
+                <Row>
+                    <Col>
+                        <h2>Total Funds</h2>
+                        <h4>{props.project.total_funds}</h4>
+                    </Col>
                 </Row>
             </div>
         </Container>            
