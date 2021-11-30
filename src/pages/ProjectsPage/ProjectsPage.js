@@ -10,8 +10,7 @@ import {
   Modal
 } from "react-bootstrap";
 import ProjectViewer from "../../components/ProjectViewer";
-// import "./ProjectsPage.css";
-import "../../App.css";
+import "./ProjectsPage.css";
 import Spacer from "react-spacer";
 const axios = require('axios');
 
