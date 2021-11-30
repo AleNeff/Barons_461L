@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Row, Col, Button, Form, FloatingLabel, ButtonGroup, Container, FormControl, ListGroup } from 'react-bootstrap';
+<<<<<<< HEAD
 import Cookies from 'js-cookie';
 import axios from 'axios';
 // import './ProjectViewer.css';
@@ -88,7 +89,12 @@ function ProjectViewer(props) {
             setQuantity(num);
         }
     }
+=======
 
+import './ProjectViewer.css';
+>>>>>>> development
+
+function ProjectViewer() {
     return(  
         <Container>
             <div>
@@ -117,13 +123,22 @@ function ProjectViewer(props) {
                 <Row className="mt-5">
                     <Col>
                     <FloatingLabel controlId="floatingSelect" label="Add user">
-                        <Form.Select aria-label="Floating label select example" onChange={(e) => setSelectedUser(e.target.value)}>
-                            {users.map(user => <option>{user.username}</option>)}
+                        <Form.Select aria-label="Floating label select example">
+                            <option value="1">Rushi</option>
+                            <option value="2">Alejandro</option>
+                            <option value="3">Nghi</option>
+                            <option value="4">Kevin</option>
+                            <option value="5">Ian</option>
                         </Form.Select>
                     </FloatingLabel>
                     </Col>
+<<<<<<< HEAD
                     <Col className="ProjectViewerCenter">
                         <Button size="lg" variant="outline-dark" onClick={() => addUser(Cookies.get('user-token'), selectedUser, props.project.project_id)}>Add User</Button>
+=======
+                    <Col className="center">
+                        <Button size="lg" variant="outline-dark">Add User</Button>
+>>>>>>> development
                     </Col>
 
                 </Row>
