@@ -14,18 +14,6 @@ import "./ProjectsPage.css";
 import Spacer from "react-spacer";
 const axios = require('axios');
 
-async function joinProject(id, user) {
-  console.log(id, user);
-  const params = {
-    current_user: user,
-    project_id: id,
-    user_name: user
-  }
-
-  const res = await axios.post(`${url}/project/add_user`, params)
-  console.log(res);
-  window.location.reload()
-}
 
 
 
@@ -42,7 +30,7 @@ function Projects(props) {
           <Spacer height="18px" />
         </Row>
         <Row>
-          <h1>Welcome {Cookies.get('user-token')}</h1>
+          <h1>Welcome {props.username}</h1>
           <Spacer height="28px" />
         </Row>
         <Row>
@@ -55,9 +43,6 @@ function Projects(props) {
                     <th>Project Name</th>
                     <th>Description</th>
                     <th>ID</th>
-                    <th>HW Set 1</th> 
-                    <th>HW Set 2</th> 
-                    <th>HW Set 3</th> 
                   </tr>
                 </thead>
                 <tbody>

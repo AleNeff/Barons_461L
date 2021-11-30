@@ -1,11 +1,11 @@
-import React from 'react';
-import { Row, Col, Form, Container, Modal, Button } from 'react-bootstrap';
-import Cookies from 'js-cookie';
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-// import "./LoginPage.css";
-import "../../App.css";
-import axios from 'axios';
+import React from "react";
+import { Row, Col, Form, Container, Modal, Button } from "react-bootstrap";
+import Cookies from "js-cookie";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import "./LoginPage.css";
+import axios from "axios";
+import Spacer from "react-spacer";
 
 /**
  *  This will authenticate the user, calling the authenticate() endpoint in Flask
@@ -33,22 +33,6 @@ async function LoginUser(user, pass) {
     });
 
   return res["username"];
-}
-
-async function RegisterUser(user, pass) {
-    console.log(user, pass);
-    const params = {
-        ID: "0000",
-        username: user,
-        password: pass
-    }
-    const res = await axios.post('https://barons461-backend.herokuapp.com/user/new_user', params);
-    if (res["data"] === 1) {
-        alert("Account created successfully! Please log in")
-    }
-    else {
-        alert("Account creation failed. Please try a different username")
-    }
 }
 
 export default function LoginPage(props) {
